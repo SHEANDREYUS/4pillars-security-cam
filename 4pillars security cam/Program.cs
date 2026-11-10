@@ -27,15 +27,42 @@ public class PTZCamera : SecurityCamera
     public int PanAngle
     {
         get => _panAngle;
-        set => _panAngle = Math.Max(-180, Math.Min(value, 180));
+        set
+        {
+            if (value > 180)
+            {
+                _panAngle = 180; 
+            }
+            else if (value < -180)
+            {
+                _panAngle = -180; 
+            }
+            else
+            {
+                _panAngle = value; 
+            }
+        }
     }
 
     public int ZoomLevel
     {
         get => _zoomLevel;
-        set => _zoomLevel = Math.Max(1, Math.Min(value, 10));
+        set
+        {
+            if (value > 10)
+            {
+                _zoomLevel = 10; 
+            }
+            else if (value < 1)
+            {
+                _zoomLevel = 1;
+            }
+            else
+            {
+                _zoomLevel = value; 
+            }
+        }
     }
-
     public PTZCamera(string id, string location) : base(id, location)
     {
         PanAngle = 90;
@@ -45,7 +72,9 @@ public class PTZCamera : SecurityCamera
     // POLYMORPHISM
     public override void StartStream()
     {
-        Console.WriteLine($"[PTZ CAM] {Camera} ({Location})");
+        Console.WriteLine($"--------------------------------------");
+        Console.WriteLine($"|[PTZ CAM] {Camera} ({Location})|");
+        Console.WriteLine($"--------------------------------------");
         Console.WriteLine($"{PanAngle}° pan angle at {ZoomLevel}x optical zoom.");
     }
 
@@ -62,13 +91,41 @@ public class ThermalCamera : SecurityCamera
     public double HeatThresholdCelsius
     {
         get => Bodyheat;
-        set => Bodyheat = Math.Max(-20.0, Math.Min(value, 100.0));
+        set
+        {
+            if (value > 100.0)
+            {
+                Bodyheat = 100.0; 
+            }
+            else if (value < -20.0)
+            {
+                Bodyheat = -20.0; 
+            }
+            else
+            {
+                Bodyheat = value; 
+            }
+        }
     }
 
     public int ZoomLevel
     {
         get => _zoomLevel;
-        set => _zoomLevel = Math.Max(1, Math.Min(value, 5));
+        set
+        {
+            if (value > 10)
+            {
+                _zoomLevel = 10;
+            }
+            else if (value < 1)
+            {
+                _zoomLevel = 1;
+            }
+            else
+            {
+                _zoomLevel = value;
+            }
+        }
     }
 
     public ThermalCamera(string id, string location, double threshold, int initialZoom = 1)
@@ -80,7 +137,9 @@ public class ThermalCamera : SecurityCamera
 
     public override void StartStream()
     {
-        Console.WriteLine($"[THERMAL CAM] {Camera} ({Location})");
+        Console.WriteLine($"-----------------------------------");
+        Console.WriteLine($"|[THERMAL CAM] {Camera} ({Location})|");
+        Console.WriteLine($"-----------------------------------");
         Console.WriteLine($" Infrared array active. Heat Trigger: {Bodyheat}°C at {ZoomLevel}x digital zoom.");
     }
 
