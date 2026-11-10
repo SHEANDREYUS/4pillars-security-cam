@@ -73,7 +73,9 @@ public class PTZCamera : SecurityCamera
     public override void StartStream()
     {
         Console.WriteLine($"--------------------------------------");
+        Console.ForegroundColor = ConsoleColor.Cyan;
         Console.WriteLine($"|[PTZ CAM] {Camera} ({Location})|");
+        Console.ResetColor();
         Console.WriteLine($"--------------------------------------");
         Console.WriteLine($"{PanAngle}° pan angle at {ZoomLevel}x optical zoom.");
     }
@@ -138,7 +140,9 @@ public class ThermalCamera : SecurityCamera
     public override void StartStream()
     {
         Console.WriteLine($"-----------------------------------");
+        Console.ForegroundColor = ConsoleColor.Cyan;
         Console.WriteLine($"|[THERMAL CAM] {Camera} ({Location})|");
+        Console.ResetColor();
         Console.WriteLine($"-----------------------------------");
         Console.WriteLine($" Infrared array active. Heat Trigger: {Bodyheat}°C at {ZoomLevel}x digital zoom.");
     }
@@ -167,7 +171,9 @@ public class Program
         while (isRunning)
         {
             Console.WriteLine("========================================");
+           
             Console.WriteLine("       CAMERA SYSTEM MENU      ");
+
             Console.WriteLine("========================================");
             Console.WriteLine("1. Configure PTZ Camera (Main Gate)");
             Console.WriteLine("\n2. Configure Thermal Camera (Front Door)");
