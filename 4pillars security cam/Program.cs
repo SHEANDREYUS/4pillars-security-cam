@@ -104,16 +104,16 @@ public class Program
 
         bool isRunning = true;
 
-       
+
         while (isRunning)
         {
             Console.WriteLine("========================================");
-            Console.WriteLine("     CAMERA MANAGEMENT SYSTEM MENU      ");
+            Console.WriteLine("       CAMERA SYSTEM MENU      ");
             Console.WriteLine("========================================");
             Console.WriteLine("1. Configure PTZ Camera (Main Gate)");
-            Console.WriteLine("2. Configure Thermal Camera (Front Door)");
-            Console.WriteLine("3. View All Live Streams & Status");
-            Console.WriteLine("4. Exit Program");
+            Console.WriteLine("\n2. Configure Thermal Camera (Front Door)");
+            Console.WriteLine("\n3. View All Live Streams & Status");
+            Console.WriteLine("\n4. Exit ");
             Console.Write("\nEnter choice (1-4): ");
 
             string choice = Console.ReadLine();
@@ -126,16 +126,10 @@ public class Program
                     Console.Clear();
                     Console.WriteLine("--- Configuring PTZ Camera ---");
                     Console.Write("Enter Pan Angle (-180 to 180): ");
-                    if (int.TryParse(Console.ReadLine(), out int userPan))
-                    {
-                        ptzCam.PanAngle = userPan;
-                    }
-
+                    ptzCam.PanAngle = int.Parse(Console.ReadLine());
+                    
                     Console.Write("Enter Zoom Level (1 to 10): ");
-                    if (int.TryParse(Console.ReadLine(), out int userZoom))
-                    {
-                        ptzCam.ZoomLevel = userZoom;
-                    }
+                    ptzCam.ZoomLevel = int.Parse(Console.ReadLine());
                     Console.WriteLine("-> PTZ Camera settings updated!\n");
                     break;
 
@@ -143,34 +137,28 @@ public class Program
                     Console.Clear();
                     Console.WriteLine("--- Configuring Thermal Camera ---");
                     Console.Write("Enter Thermal Threshold in °C (-20 to 100): ");
-                    if (double.TryParse(Console.ReadLine(), out double userHeat))
-                    {
-                        thermalCam.HeatThresholdCelsius = userHeat;
-                    }
+                    thermalCam.HeatThresholdCelsius = double.Parse(Console.ReadLine());
 
                     Console.Write("Enter Digital Zoom Level (1 to 5): ");
-                    if (int.TryParse(Console.ReadLine(), out int thermalZoom))
-                    {
-                        thermalCam.ZoomLevel = thermalZoom;
-                    }
+                    thermalCam.ZoomLevel = int.Parse(Console.ReadLine());
                     Console.WriteLine("-> Thermal Camera settings updated!\n");
-                break;
+                    break;
 
-            case "3":
-                Console.Clear();
-                Console.WriteLine("=== SECURITY CAMERA STATUS ===\n");
+                case "3":
+                    Console.Clear();
+                    Console.WriteLine("=== SECURITY CAMERA STATUS ===\n");
                     foreach (var camera in surveillanceNetwork)
                     {
                         camera.StartStream();
-                        Console.WriteLine(camera.GetStatus());
+                        Console.WriteLine($"\n{camera.GetStatus()}");
                         Console.WriteLine();
                     }
-                break;
+                    break;
 
-            case "4":
-                Console.Clear();
-                Console.WriteLine("Exiting Camera Control System. Goodbye!");
-                    isRunning = false; 
+                case "4":
+                    Console.Clear();
+                    Console.WriteLine("Exiting Camera Control System. Goodbye!");
+                    isRunning = false;
                     break;
 
                 default:
