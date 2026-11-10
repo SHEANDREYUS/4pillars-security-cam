@@ -159,7 +159,7 @@ public class Program
         PTZCamera ptzCam = new PTZCamera("CAM-01", "Main Gate Parking");
         ThermalCamera thermalCam = new ThermalCamera("CAM-02", "Front door", 37.5);
 
-        List<SecurityCamera> surveillanceNetwork = new List<SecurityCamera>
+        List<SecurityCamera> securityCam = new List<SecurityCamera>
         {
             ptzCam,
             thermalCam
@@ -212,7 +212,7 @@ public class Program
                 case "3":
                     Console.Clear();
                     Console.WriteLine("=== SECURITY CAMERA STATUS ===\n");
-                    foreach (var camera in surveillanceNetwork)
+                    foreach (var camera in securityCam)
                     {
                         camera.StartStream();
                         Console.WriteLine($"\n{camera.GetStatus()}");
