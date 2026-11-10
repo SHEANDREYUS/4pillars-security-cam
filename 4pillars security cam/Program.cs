@@ -222,7 +222,7 @@ public class Program
 
                 case "4":
                     Console.Clear();
-                    Console.WriteLine("Exiting Camera Control System. Goodbye!");
+                    Console.WriteLine("Exiting Camera Control System.");
                     isRunning = false;
                     break;
 
